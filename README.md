@@ -1,0 +1,1 @@
+# wisefi-automatic-test

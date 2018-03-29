@@ -7,6 +7,7 @@ from selenium.webdriver.support.expected_conditions import visibility_of_element
 from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
 
+
 driver = webdriver.Chrome()
 driver.get("http://127.0.0.1:8000/")
 driver.maximize_window()
@@ -17,7 +18,7 @@ def find(self, *locator, timeout=30):
     element = WebDriverWait(driver, timeout).until(visibility_of_element_located(*locator))
     return element
 
-
+'''
 def login(user, password):
     driver.find_element_by_id("username").send_keys(user)
     driver.find_element_by_name("password").send_keys(password)
@@ -28,6 +29,9 @@ def login(user, password):
         print("Title OK")
     else:
         print("Title NOk")
+'''
+login.wisefi_login("admin", "12345678").login()
+
 
 
 def configure_ssid():
@@ -41,7 +45,9 @@ def configure_ssid():
     driver.find_element_by_id("generate").click()
 
 
+'''
 login("admin", "12345678")
 configure_ssid()
 driver.implicitly_wait(20)
 driver.quit()
+'''

@@ -1,8 +1,9 @@
 from selenium import webdriver
+from selenium.webdriver.support.select import Select
+
 
 driver = webdriver.Chrome()
-
-#Loginw
+driver.set_page_load_timeout(15)
 
 
 class Login:
@@ -14,22 +15,22 @@ class Login:
         self.password = password
 
     def run(self):
-        print("URL", self.url)
         driver.get(self.url)
+        driver.maximize_window()
         driver.find_element_by_id("username").send_keys(self.username)
         driver.find_element_by_name("password").send_keys(self.password)
         driver.find_element_by_tag_name("button").click()
         title = driver.title
         print(title)
-        if "WiseFi" == title:
+        if driver.find_element_by_id("button_home"):
+            botao = driver.find_element_by_id("button_home").get_attribute("id")
+            print(botao)
             print("Login feito com sucesso")
-            return 1
         else:
-            print("Login não foi feito")
-
+            print("Login não foi feito!")
+        return driver
         #driver.quit()
 
-'''
+
 if __name__ == '__main__':
-    login("admin","12345678").login_wisefi()
-'''
+    Login("http://127.0.0.1:8000", "admin","12345678").run()

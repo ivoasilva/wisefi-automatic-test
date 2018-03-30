@@ -1,10 +1,8 @@
 from selenium import webdriver
 
-#from Login import Logindfd
-
 
 import Login
-
+import Voucher
 
 
 class Run:
@@ -22,9 +20,9 @@ class Run:
         print("Password:", self.password)
         url = "http://" + str(self.ip) + ":" + str(self.port)
         print("URL", url)
-
-        status_login = Login.Login(url, self.username, self.password).run()
-        #print(status_login)
+        #Login.Login(url, self.username, self.password).run()
+        result = Voucher.Voucher(url, self.username, self.password).generate_voucher()
+        print("Result Test Voucher: ", result)
 
 if __name__ == '__main__':
     Run("127.0.0.1", 8000, "admin", "12345678").main()

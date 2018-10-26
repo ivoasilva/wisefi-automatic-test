@@ -12,27 +12,25 @@ import Login
 import Socket_client_voucher
 
 
-class Voucher:
+class Wlan:
 
     def __init__(self, url, username, password):
         self.url = url
         self.username = username
         self.password = password
 
-    def generate_voucher(self):
+    def configure_ssid_cp_voucher(self):
 
         driver = Login.Login(self.url, self.username, self.password).run()
-        driver.find_element_by_id("button_cp").click()
-        driver.find_element_by_id("qtd").send_keys("1")
-        driver.find_element_by_id("numDevices").send_keys("1")
-        select_temp = Select(driver.find_element_by_id("id_time"))
-        select_temp.select_by_value("other")
-        driver.find_element_by_id("valueTime").clear()
-        driver.find_element_by_id("valueTime").send_keys("1")
-        driver.find_element_by_id("generate").click()
-        #voucher = driver.find_element_by_id("4_cod").get_attribute
-        voucher = 270766
-        print("Voucher gerado", voucher)
-        result = Socket_client_voucher.Socket("WiseFiTest", voucher, "1", 1).Socket_client()
+        driver.find_element_by_id("button_network").click()
+        driver.find_element_by_id("button_wlan").click()
+        driver.find_element_by_id("1_edit").click()
+        driver.find_element_by_id("ssid1").clear()
+        driver.find_element_by_id("ssid1").send_keys("WiseFiTest")
+        select_temp = Select(driver.find_element_by_id("id_ssid1Security"))
+        select_temp.select_by_value("5")
+        select_temp = Select(driver.find_element_by_id("id_ssid1CaptivePortal"))
+        select_temp.select_by_value("2")
+        driver.find_element_by_id("save").click()
+        print("SSID ALTERADO PARA CP VOUCHER")
         driver.quit()
-        return result
